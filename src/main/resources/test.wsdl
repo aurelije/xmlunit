@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions
+        name="ingredient"
+        targetNamespace="/ingredient"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:tns="/ingredient"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+        <xsd:schema targetNamespace="/ingredient">
+            <xsd:element name="getIngredientInfo" type="tns:IngredientRequest"></xsd:element>
+
+            <xsd:complexType name="IngredientRequest">
+                <xsd:sequence>
+                    <xsd:element name="ingredient_id" type="xsd:int"></xsd:element>
+
+                    <xsd:element name="something" type="xsd:string"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:element name="getIngredientInfoResponse" type="tns:ingredient"></xsd:element>
+
+            <xsd:complexType name="ingredient">
+                <xsd:sequence>
+                    <xsd:element name="ingredient_id" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="ingredient_name" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+
+                    <xsd:element name="status_gm" type="xsd:boolean" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="status_vegan" type="xsd:boolean" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="status_vegetarian" type="xsd:boolean" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="author_id" type="xsd:int" block="#all" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="getIngredientInfoRequest">
+        <wsdl:part element="tns:getIngredientInfo" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getIngredientInfoResponse">
+
+        <wsdl:part element="tns:getIngredientInfoResponse"
+                   name="parameters" />
+    </wsdl:message>
+    <wsdl:portType name="ingredient">
+        <wsdl:operation name="getIngredientInfo">
+            <wsdl:input message="tns:getIngredientInfoRequest"/>
+            <wsdl:output message="tns:getIngredientInfoResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ingredientSOAP" type="tns:ingredient">
+
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="getIngredientInfo">
+            <soap:operation
+                    soapAction="http://entropy.homelinux.org/kasak/" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ingredient">
+        <wsdl:port binding="tns:ingredientSOAP" name="ingredientSOAP">
+            <soap:address location="http://entropy.homelinux.org/kasak/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

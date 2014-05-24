@@ -1,0 +1,6 @@
+<parent>
+    <child2 foo="baz"/>
+    <child1/>
+    <child2>xyzzy</child2>
+    <child2 foo="bar"/>
+</parent>

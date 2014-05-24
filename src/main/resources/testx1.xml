@@ -1,0 +1,11 @@
+<table>
+    <tr>
+        <td>bar</td>
+    </tr>
+    <tr>
+        <td foo="baz">foo</td>
+    </tr>
+    <tr>
+        <td foo="bar"><tt>foo</tt></td>
+    </tr>
+</table>
